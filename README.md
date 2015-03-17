@@ -6,3 +6,5 @@ on what category is chosen from the menu.
 
 The page currently has a number of Jasmine javascript tests set to run to verify
 the page's functionality.  The tests can be found and read about in frontend-nanodegree-feedreader\jasmine\spec\feedreader.js.
+
+To run the application, open index.html in your browser of choice.
