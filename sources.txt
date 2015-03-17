@@ -1,0 +1,5 @@
+http://jasmine.github.io/2.1/introduction.html
+
+http://www.htmlgoodies.com/beyond/javascript/stips/using-jasmine-2.0s-new-done-function-to-test-asynchronous-processes.html
+
+http://api.jquery.com/

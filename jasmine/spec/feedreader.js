@@ -56,33 +56,77 @@ $(function() {
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* Test suite for the menu functionality */
+    describe("The menu", function() {
 
-        /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
+        /* Test that ensures the menu element is
+         * hidden by default. (i.e., the body starts
+         * with the class menu-hidden.
          */
+    	it('starts hidden', function() {
+    		expect($("body").hasClass("menu-hidden")).toBe(true);
+    	});
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
+         /* Test that ensures the menu changes
+          * visibility when the menu icon is clicked by triggering
+          * click events on the menu-icon-link
           */
+    	it('shows and hides', function() {
+    		var menuIcon = $('.menu-icon-link');
+    		menuIcon.trigger("click");
+    		expect($("body").hasClass("menu-hidden")).not.toBe(true);
+    		menuIcon.trigger("click");
+    		expect($("body").hasClass("menu-hidden")).toBe(true);
+    	});
+    });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Test suite to check initial entries */
+    describe('Initial Entries', function() {
 
-        /* TODO: Write a test that ensures when the loadFeed
-         * function is called and completes its work, there is at least
-         * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test wil require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
+    	/* beforeEach will call the loadFeed()
+    	 * function, and pass an anonymous function calling done() as the
+    	 * callback.  This call to done() will signal the test that it can
+    	 * run.
+    	 */
+    	beforeEach(function(done) {
+    		loadFeed(0, function() {done();});
+    	});
+    	
+    	/*
+    	 * Checks that there is at least 1 entry-link after loadFeed()
+    	 * runs.
+    	 */
+    	it('have at least 1 entry', function() {
+    		expect($(".feed .entry-link").size()).toBeGreaterThan(0);
+    	});
+    });
 
-    /* TODO: Write a new test suite named "New Feed Selection"
-
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+    /* Test suite to check new feed load behavior */
+    describe('New Feed Selection', function() {
+    	var initialFeedHtml;
+    	var newFeedHtml;
+    	
+    	/* beforeEach loads the first feed, saves the html, and
+    	 * then loads the second feed and saves the html in a
+    	 * separate variable.
+    	 */
+    	beforeEach(function(done) {
+    		loadFeed(0, function() {
+    			initialFeedHtml = $(".feed").html();
+    			loadFeed(1, function() {
+    				newFeedHtml = $(".feed").html();
+    				done();
+    			});
+    		});	
+    	});
+    	
+    	/*
+    	 * checks that the two feed html strings from the
+    	 * two different feeds have different content.
+    	 */
+    	it('changes content', function() {
+    		expect(initialFeedHtml).not.toBe(newFeedHtml);
+    	});
+    });
+    
 }());
