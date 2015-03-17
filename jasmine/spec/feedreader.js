@@ -27,16 +27,32 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* Loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+    	it('have urls', function() {
+    		for (i = 0; i < allFeeds.length; i++)
+            {
+	    		var url = allFeeds[i].url;
+	    		expect(url).toBeDefined();
+	    		expect(url).not.toBe("");
+            }
+    	});
 
 
-        /* TODO: Write a test that loops through each feed
+        /* Loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+    	it('have names', function() {
+    		for (i = 0; i < allFeeds.length; i++)
+            {
+	    		var url = allFeeds[i].name;
+	    		expect(url).toBeDefined();
+	    		expect(url).not.toBe("");
+            }
+    	});
     });
 
 
